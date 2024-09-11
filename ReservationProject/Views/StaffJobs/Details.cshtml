@@ -1,0 +1,26 @@
+﻿@model ReservationProject.Models.StaffJob
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StaffJob</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.STAFFJOB_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STAFFJOB_NAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.STAFFJOB_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

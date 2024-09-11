@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ReservationProject.Models.Customer>
+@using ReservationProject.Models;
+
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+
+
+    <h1 style="background-color:black; color:white">
+        <br /><br /><br /><p style="text-align:center" class="breadcrumbs"><span class="mr-2"><a href="index.html">User <i class="fa fa-chevron-right"></i></a></span> <span>Manage Account <i class="fa fa-chevron-right"></i></span></p>
+    </h1>
+
+
+   
+    <table class="table table-active table-hover col-lg-12  " style="text-align:center">
+        <tr style="background-color:#e52b34">
+            <th>
+               NAME
+            </th>
+            <th>
+               EMAIL
+            </th>
+            <th>
+              ADDRESS
+            </th>
+            <th>
+               CONTACT
+            </th>
+            <th>
+               PASSWORD
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (Session["Customer"] != null)
+            {
+                Customer c = (Customer)Session["Customer"];
+                if (c.CUSTOMER_ID == item.CUSTOMER_ID)
+                {
+                <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUSTOMER_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUSTOMEREMAIL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUSTOMERADDRESS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUSTOMERCONTACT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUSTOMER_PASSWORD)
+                </td>
+                <td>
+
+                    <a class="btn btn-secondary fa fa-edit" href="@Url.Action("Edit", "Customers", new { id = item.CUSTOMER_ID })"></a> |
+                    <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "Customers", new { id = item.CUSTOMER_ID })"></a> |
+                    <a class="btn btn-danger fa fa-trash-o" href="@Url.Action("Delete", "Customers", new { id = item.CUSTOMER_ID })"></a>
+
+
+
+                   
+                </td>
+            </tr>
+                }
+            }
+        }
+
+    </table>
+</body>
+</html>

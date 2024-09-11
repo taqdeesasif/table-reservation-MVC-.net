@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ReservationProject.Models.AssignRole>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","AssignRoles")" class="btn btn-dangerrr">Create</a>
+</p>
+<table class="table table-condensed table-striped table-responsive table-hover">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Admin.ADMIN_NAME)
+        </th>
+        <th>
+           ROLE
+        </th>
+        <th></th>
+    </tr>
+        </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Admin.ADMIN_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoleAdm.AD_ROLE_NAME)
+        </td>
+        <td>
+
+            <a class="btn btn-primary fa fa-edit" href="@Url.Action("Edit", "AssignRoles", new { id = item.ASSIGN_ROLE_ID })"></a> |
+            <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "AssignRoles", new { id = item.ASSIGN_ROLE_ID })"></a> |
+            <a class="btn btn-danger fa fa-trash-o" href="@Url.Action("Delete", "AssignRoles", new { id = item.ASSIGN_ROLE_ID })"></a>
+
+
+
+          
+
+
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,211 @@
+﻿@using ReservationProject.Models
+@{
+    Model5 db = new Model5();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Food O'clock - Customer Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/Content/Customer/css/animate.css">
+
+    <link rel="stylesheet" href="~/Content/Customer/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/Customer/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Content/Customer/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="~/Content/Customer/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Content/Customer/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="~/Content/Customer/css/flaticon.css">
+    <link rel="stylesheet" href="~/Content/Customer/css/style.css">
+</head>
+<body>
+
+    <div class="wrap">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-12 col-md d-flex align-items-center">
+                    <p class="mb-0 phone"><span class="mailus">Phone no:</span> <a href="#">@db.Resturants.Where(x => x.IS_VALID == true).Select(x => x.RESTURANT_CONTACT).First()</a> or <span class="mailus">email us:</span> <a href="#">@db.Resturants.Where(x => x.IS_VALID == true).Select(x => x.RESTURANT_EMAIL).First()</a></p>
+                    <p class="mb-0 phone">&nbsp; Address -<a href="#"> @db.Resturants.Where(x => x.IS_VALID == true).Select(x => x.RESTURANT_ADDRESS).First() </a></p>
+                </div>
+                <div class="col-12 col-md d-flex justify-content-md-end">
+                    <p class="mb-0">Admin Login</p>
+                    <div class="social-media">
+                        <p class="mb-0 d-flex">
+                            <a href="@Url.Action("Login","Home")" class="d-flex align-items-center justify-content-center" ><span class="fa fa-user" ><i class="sr-only" style="color:white">Admin</i></span></a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a href="@Url.Action("IndexCustomer","Home")"><img src="@Url.Content(db.Resturants.Where(x=>x.IS_VALID == true).Select(x => x.RESTURANT_LOGO).First())" style="width:250px;height:100px;"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="@Url.Action("IndexCustomer","Home")" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="@Url.Action("DisplayMenu","Home")" class="nav-link">Menu</a></li>
+                    <li class="nav-item"><a href="@Url.Action("DisplayTables","Home")" class="nav-link">Reservation</a></li>
+                    <li class="nav-item"><a href="@Url.Action("DisplayStaff","Home")" class="nav-link">Chef</a></li>
+                    <li class="nav-item"><a href="@Url.Action("Blog","Home")" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="@Url.Action("About","Home")" class="nav-link">About</a></li>
+                    <li class="nav-item "><a href="@Url.Action("Contact","Home")" class="nav-link">ContactUs</a></li>
+                    <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle arrow">Account</a>
+                    <ul class="dropdown-menu" style="background-color:black">
+
+
+
+                        @if (Session["Customer"] != null)
+                        {
+                            <li class="nav-link"><a href="@Url.Action("Index", "Customers")" style="color:white">Manage Account</a></li>
+
+                            <li class="nav-link"><a href="@Url.Action("CustomerHistory", "Customers")" style="color:white">History</a></li>
+
+                            <li class="nav-link"><a href="@Url.Action("CancelledOrder", "Customers")" style="color:white">My Cancelled</a></li>
+                            <li class="nav-link"><a href="@Url.Action("Logout", "Customers")" style="color:white">Logout</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-link"><a href="@Url.Action("Create", "Customers")" style="color:white">SignUp</a></li>
+
+                            <li class="nav-link"><a href="@Url.Action("Login","Customers")" style="color:white">Login</a></li>
+                        }
+
+                    </ul>
+                    </li>
+                    <li class="nav-item "><a href="@Url.Action("Feedback","Home")" class="nav-link">Feedback</a></li>
+
+                   
+                </ul>
+                
+                   
+
+               
+            </div>
+        </div>
+    </nav>
+    <!-- END nav -->
+
+
+
+
+    @RenderBody()
+
+
+    <footer class="ftco-footer ftco-no-pb ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-6 col-lg-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">FoodO'clock</h2>
+                        <p>
+                            We announce with great pleasure that we have just opened a new Resturant near your street namely Food O'clock.
+                        </p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
+                            <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Open Hours</h2>
+                        <ul class="list-unstyled open-hours">
+                            <li class="d-flex"><span>Monday</span><span>12:00 - 24:00</span></li>
+                            <li class="d-flex"><span>Tuesday</span><span>12:00 - 24:00</span></li>
+                            <li class="d-flex"><span>Wednesday</span><span>12:00 - 24:00</span></li>
+                            <li class="d-flex"><span>Thursday</span><span>12:00 - 24:00</span></li>
+                            <li class="d-flex"><span>Friday</span><span>12:00 - 24:00</span></li>
+                            <li class="d-flex"><span>Saturday</span><span>12:00 - 24:00</span></li>
+                            <li class="d-flex"><span>Sunday</span><span> 12:00 - 24:00</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Instagram</h2>
+                        <div class="thumb d-sm-flex">
+                            <a href="#" class="thumb-menu img" style="background-image: url(../Content/Customer/images/insta-1.jpg);">
+                            </a>
+                            <a href="#" class="thumb-menu img" style="background-image: url(../Content/Customer/images/insta-2.jpg);">
+                            </a>
+                            <a href="#" class="thumb-menu img" style="background-image: url(../Content/Customer/images/insta-3.jpg);">
+                            </a>
+                        </div>
+                        <div class="thumb d-flex">
+                            <a href="#" class="thumb-menu img" style="background-image: url(../Content/Customer/images/insta-4.jpg);">
+                            </a>
+                            <a href="#" class="thumb-menu img" style="background-image: url(../Content/Customer/images/insta-5.jpg);">
+                            </a>
+                            <a href="#" class="thumb-menu img" style="background-image: url(../Content/Customer/images/insta-6.jpg);">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Newsletter</h2>
+                        <p>
+                            No matter what kind of meal you have in mind, The Food O'clock Restaurant is ready to prepare it for you.
+                        </p>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid px-0 bg-primary py-3">
+            <div class="row no-gutters">
+                <div class="col-md-12 text-center">
+
+                    <p class="mb-0">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Taqdees Asif</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+
+    <script src="~/Content/Customer/js/jquery.min.js"></script>
+    <script src="~/Content/Customer/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/Content/Customer/js/popper.min.js"></script>
+    <script src="~/Content/Customer/js/bootstrap.min.js"></script>
+    <script src="~/Content/Customer/js/jquery.easing.1.3.js"></script>
+    <script src="~/Content/Customer/js/jquery.waypoints.min.js"></script>
+    <script src="~/Content/Customer/js/jquery.stellar.min.js"></script>
+    <script src="~/Content/Customer/js/owl.carousel.min.js"></script>
+    <script src="~/Content/Customer/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/Customer/js/jquery.animateNumber.min.js"></script>
+    <script src="~/Content/Customer/js/bootstrap-datepicker.js"></script>
+    <script src="~/Content/Customer/js/jquery.timepicker.min.js"></script>
+    <script src="~/Content/Customer/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="~/Content/Customer/js/google-map.js"></script>
+    <script src="~/Content/Customer/js/main.js"></script>
+
+</body>
+</html>

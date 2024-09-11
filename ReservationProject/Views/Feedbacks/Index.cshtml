@@ -1,0 +1,85 @@
+﻿@model IEnumerable<ReservationProject.Models.Feedback>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","Feedbacks")" class="btn btn-dangerrr">Create</a>
+</p>
+<table class="table table-condensed table-striped table-responsive table-hover">
+    <thead>
+    <tr>
+        <th>
+            ADMIN NAME
+        </th>
+        <th>
+           Customer Name
+        </th>
+        <th>
+           REVIEW TYPE
+        </th>
+        <th width="120px">
+           FEEDBACK
+        </th>
+        <th width="30px">
+         EMAIL
+        </th>
+        <th width="50">
+        CONTACT
+        </th>
+        <th width="50px">
+           DATE
+        </th>
+        <th width="50px">
+          REPLY DATE
+        </th>
+        <th width="120px">
+           RECEIVER MESSAGE
+        </th>
+        <th width="180px" ></th>
+    </tr>
+        </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Admin.ADMIN_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.CUSTOMER_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.REVIEW_TYPE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FEEDBACK_MESSAGE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FEEDBACK_EMAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FEEDBACK_CONTACT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FEDDBACK_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.REPLY_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RECEIVER_MESSAGE)
+        </td>
+        <td>
+            <a class="btn btn-primary fa fa-edit" href="@Url.Action("Edit", "Feedbacks", new { id = item.FEEDBACK_ID })"></a> |
+            <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "Feedbacks", new { id = item.FEEDBACK_ID })"></a> |
+            <a class="btn btn-danger fa fa-trash-o" href="@Url.Action("Delete", "Feedbacks", new { id = item.FEEDBACK_ID })"></a>
+
+
+        </td>
+    </tr>
+}
+
+</table>

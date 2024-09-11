@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+
+
+<h1 style="background-color:black; color:white">
+    <br /><br /><br /><p style="text-align:center" class="breadcrumbs"><span class="mr-2"><a href="index.html">Account <i class="fa fa-chevron-right"></i></a></span> <span>Forget Password <i class="fa fa-chevron-right"></i></span></p>
+</h1>
+
+
+
+<br />
+
+
+
+
+<br />
+@using (Html.BeginForm("ForgetPass", "Customers", FormMethod.Post))
+
+{
+    
+<table class="  table-active col-sm-12 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary ">
+
+    <tr><td colspan="2" style="color:white; text-align: center; font-size:xx-large"><b>Enter Your Email Address </b> <hr /></td></tr>
+    <tr><td colspan="2" style="color:black; text-align: center; font-size:small"><b>Password will be sent to your email address</b> <hr /></td></tr>
+
+    <tr><td style="color:black">Email:</td><td><input name="CUSTOMEREMAIL" type="text" /></td></tr>
+
+    <tr><td style="color: white; font-size:large" colspan="2">@ViewBag.Message <hr /></td></tr>
+    <tr><td colspan="2"><input type="submit" value="Submit" class="btn  btn-dark btn-block " /></td></tr>
+
+</table>
+
+
+
+}
+<br />
+

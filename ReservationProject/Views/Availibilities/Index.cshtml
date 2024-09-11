@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ReservationProject.Models.Availibility>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","Availibilities")" class="btn btn-dangerrr">Create</a>
+</p>
+<table class="table table-condensed table-striped table-responsive table-hover ">
+    <thead>
+        <tr>
+            <th>
+                UNAVAILABLE DATE
+            </th>
+            <th>
+                UNAVAILABLE TIME
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UNAVAILABLE_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UNAVAILABLE_TIME)
+        </td>
+        <td>
+            <a class="btn btn-primary fa fa-edit" href="@Url.Action("Edit", "Availibilities", new { id = item.AVAILABLE_ID }) "></a> |
+            <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "Availibilities", new { id = item.AVAILABLE_ID })"></a> |
+            <a class="btn btn-danger fa fa-trash-o" href="@Url.Action("Delete", "Availibilities", new { id = item.AVAILABLE_ID })"></a>
+
+
+
+
+
+          
+        </td>
+    </tr>
+}
+
+</table>

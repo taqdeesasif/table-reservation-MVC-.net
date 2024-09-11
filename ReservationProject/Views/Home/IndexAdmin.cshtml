@@ -1,0 +1,177 @@
+﻿@using ReservationProject.Models
+
+
+@{
+    Model5 db = new Model5();
+
+
+
+}
+
+
+<hr />
+<div class="row">
+
+
+
+
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-primary text-center no-boder bg-color-brown">
+            <div class="panel-body">
+                <a href="@Url.Action("Index","Resturants")" style="color:white">  <i class="fa fa-desktop fa-5x"></i> </a>
+
+            </div>
+            <div class="panel-footer back-footer-red" style="background-color:firebrick">
+                Manage Resturants
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-primary text-center no-boder bg-color-blue">
+            <div class="panel-body">
+                <a href="@Url.Action("Index","Resturants")" style="color:white">  <i class="fa fa-users fa-5x"></i> </a>
+
+            </div>
+            <div class="panel-footer back-footer-green" style="background-color:mediumpurple">
+                Manage Staffs
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-primary text-center no-boder bg-color-green">
+            <div class="panel-body">
+                <a href="@Url.Action("Index","Items")" style="color:white">  <i class="fa fa-align-left fa-5x"></i> </a>
+
+            </div>
+            <div class="panel-footer back-footer-green">
+                Manage Menu
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-primary text-center no-boder bg-color-red">
+            <div class="panel-body">
+                <a href="@Url.Action("Index","Resturants")" style="color:white">  <i class="fa fa-picture-o fa-5x"></i> </a>
+
+            </div>
+            <div class="panel-footer back-footer-red">
+                Manage Blogs
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-primary text-center no-boder bg-color-green">
+            <div class="panel-body">
+                <a href="@Url.Action("Index","Resturants")" style="color:white">  <i class="fa fa-table fa-5x"></i> </a>
+
+            </div>
+            <div class="panel-footer back-footer-green">
+                Manage Tables
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-primary text-center no-boder bg-color-brown">
+            <div class="panel-body">
+                <a href="@Url.Action("Index","Resturants")" style="color:white">  <i class="fa fa-comments-o fa-5x"></i> </a>
+
+            </div>
+            <div class="panel-footer back-footer-red" style="background-color:firebrick">
+                Manage Feedback
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-primary text-center no-boder bg-color-blue">
+            <div class="panel-body">
+                <a href="@Url.Action("Index","Resturants")" style="color:white">  <i class="fa fa-clock-o fa-5x"></i> </a>
+
+            </div>
+            <div class="panel-footer back-footer-green" style="background-color:mediumpurple">
+                Manage Booking Dates
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-primary text-center no-boder bg-color-green">
+            <div class="panel-body">
+                <a href="@Url.Action("Index","Resturants")" style="color:white">  <i class="fa fa-info-circle fa-5x"></i> </a>
+
+            </div>
+            <div class="panel-footer back-footer-green">
+                Manage Reservations
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-back noti-box">
+            <span class="icon-box bg-color-red set-icon">
+                <i class="fa fa-envelope-o"></i>
+            </span>
+            <div class="text-box">
+                <p class="main-text">@db.ContactUs.Count() Contact</p>
+                <p class="text-muted">Messages</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-back noti-box">
+            <span class="icon-box bg-color-green set-icon">
+                <i class="fa fa-bars"></i>
+            </span>
+            <div class="text-box">
+                <p class="main-text">@db.Items.Count() Menu</p>
+                <p class="text-muted">Items</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-back noti-box">
+            <span class="icon-box bg-color-blue set-icon">
+                <i class="fa fa-comments-o"></i>
+            </span>
+            <div class="text-box">
+                <p class="main-text">@db.Feedbacks.Count() Feedback </p>
+                <p class="text-muted">Comments</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="panel panel-back noti-box">
+            <span class="icon-box bg-color-brown set-icon">
+                <i class="fa fa-user"></i>
+            </span>
+            <div class="text-box">
+                <p class="main-text">@db.Admins.Count() Admins</p>
+                <p class="text-muted">Manage Website</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /. ROW  -->
+<hr />
+

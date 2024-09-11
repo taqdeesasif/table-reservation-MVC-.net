@@ -1,0 +1,58 @@
+﻿@model ReservationProject.Models.TabCategory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TabCategory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TABCATEGORY_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TABCATEGORY_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TABCATEGORY_DESCRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TABCATEGORY_DESCRIPTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TABCATEGORY_PICTURE)
+        </dt>
+
+        <dd>
+            <img height="100px" width="100px" src="@Url.Content(Model.TABCATEGORY_PICTURE)" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TABCATEGORY_PRICE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TABCATEGORY_PRICE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VALIDATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VALIDATE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TABCATEGORY_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

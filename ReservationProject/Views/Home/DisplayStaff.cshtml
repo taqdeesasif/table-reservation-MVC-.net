@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ReservationProject.Models.Staff>
+
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+
+
+<h1 style="background-color:black; color:white">
+    <br /><br /><br /><p style="text-align:center" class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Chef <i class="fa fa-chevron-right"></i></span></p>
+</h1>
+
+
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-2">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <span class="subheading">Chef</span>
+                <h2 class="mb-4">Our Master Chef</h2>
+            </div>
+        </div>
+
+
+        <div class="row">
+            @foreach (var t in Model)
+            {
+                <div class="col-md-6 col-lg-3 ftco-animate">
+
+
+                    <div class="staff">
+
+                        <div class="img" style="background-image: url(@Url.Content(t.STAFF_PICTURE));"></div>
+                        <div class="text px-4 pt-2">
+                            <h3>@t.STAFF_NAME</h3>
+                            <span class="position mb-2" style="color:#b0b0b0">@t.StaffJob.STAFFJOB_NAME</span>
+                            <div class="faded">
+                                <p>@t.SERVICES.</p>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            }
+
+        </div>
+        </div>
+
+</section>
+
+<script type="text/javascript">
+    window.onload = function () { window.scrollBy(0, 350); }
+</script>
+

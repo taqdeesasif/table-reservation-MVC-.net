@@ -1,0 +1,200 @@
+﻿@using ReservationProject.Models
+
+
+@{
+    Model5 db = new Model5();
+
+
+
+}
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food O'clock - Admin Template</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="~/Content/Admin/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="~/Content/Admin/assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- MORRIS CHART STYLES-->
+    <link href="~/Content/Admin/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="~/Content/Admin/assets/css/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+
+
+</head>
+<body>
+    <div id="wrapper">
+
+
+
+
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+
+                <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header" style="background-color:transparent">
+
+                        <a href="@Url.Action("IndexCustomer","Home")"><img src="@Url.Content(db.Resturants.Where(x=>x.IS_VALID == true).Select(x => x.RESTURANT_LOGO).First())" alt="HTML tutorial" style="width:230px;height:100px;"></a>
+
+                    </div>
+
+                </nav>
+
+
+
+                <ul class="nav" id="main-menu">
+
+
+                    <li>
+                        <a href="@Url.Action("IndexAdmin","Home")"><i class="fa fa-dashboard fa-3x"></i> DashBoard</a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","Resturants")"><i class="fa fa-desktop fa-2x"></i> Manage Resturant</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","Admins")"><i class="fa fa-user fa-2x"></i> Manage Admins</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","AssignRoles")"><i class="fa fa-users fa-2x"></i> Manage Admin Roles</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","Blogs")"><i class="fa fa-picture-o fa-2x"></i> Manage Blogs</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","TabCategories")"><i class="fa fa-th fa-2x"></i> Manage Table Category</a>
+                    </li>
+
+
+                    <li>
+                        <a href="#"><i class="fa fa-align-left fa-2x"></i> Menu <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="@Url.Action("Index","ItemCategories")">Manage Menu Category</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index","Items")">Manage Menu</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-users fa-2x"></i>Staff<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="@Url.Action("Index","StaffJobs")"> Manage Staff Jobs</a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("Index","Staffs")"> Manage Staff</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-2x"></i>Reports<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="@Url.Action("DailyReport","Reports")">Daily Report</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("WeeklyReport","Reports")">Weekly Report</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("SaleReport","Reports")">Reservation Report</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ReportWithoutFood","Reports")">Without Pre-Order</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ReportWithFood","Reports")">With Pre-Order</a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                   
+                     <li>
+                        <a href="@Url.Action("Index", "Availibilities")"><i class="fa fa-clock-o fa-3x"></i> Manage Booking Dates</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Reservations")"><i class="fa fa-info fa-3x"></i> Manage Reservations</a>
+                    </li>
+                    
+                    <li>
+                        <a href="@Url.Action("Index","Feedbacks")"><i class="fa fa-comments-o fa-3x"></i> Manage Feedback</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","ContactUs")"><i class="fa fa-mail-reply fa-3x"></i> ContactUs</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+        <div>
+            @if (User.Identity.IsAuthenticated)
+            {<div style="color: black;
+padding: 10px 50px 5px 250px;
+float: left;
+font-size: 16px;">
+                    <h5>
+                        Welcome <a style="color:#d9534f">
+                            @User.Identity.Name
+
+                        </a> , Love to see you back.
+                    </h5>
+                </div>
+            }
+
+
+            <div style="color: black;
+padding: 3px 50px 5px 50px;
+float: right;
+font-size: 16px;"><h5> @System.DateTime.Now.ToLongDateString() @System.DateTime.Now.ToShortTimeString() &nbsp; <a href="@Url.Action("Logout","Home")" class="btn btn-danger square-btn-adjust">Logout</a> </h5></div>
+
+
+</div>
+<!-- /. NAV SIDE  -->
+<div id="page-wrapper">
+    <div id="page-inner">
+
+        <!-- /. ROW  -->
+
+
+        @RenderBody()
+
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+<!-- JQUERY SCRIPTS -->
+<script src="~/Content/Admin/assets/js/jquery-1.10.2.js"></script>
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="~/Content/Admin/assets/js/bootstrap.min.js"></script>
+<!-- METISMENU SCRIPTS -->
+<script src="~/Content/Admin/assets/js/jquery.metisMenu.js"></script>
+<!-- MORRIS CHART SCRIPTS -->
+<script src="~/Content/Admin/assets/js/morris/raphael-2.1.0.min.js"></script>
+<script src="~/Content/Admin/assets/js/morris/morris.js"></script>
+<!-- CUSTOM SCRIPTS -->
+<script src="~/Content/Admin/assets/js/custom.js"></script>
+
+
+</body>
+</html>
+

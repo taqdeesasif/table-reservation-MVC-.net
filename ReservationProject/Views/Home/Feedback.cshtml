@@ -1,0 +1,151 @@
+﻿@using ReservationProject.Models;
+
+@{
+    Model5 db = new Model5();
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+<h1 style="background-color:black; color:white">
+    <br /><br /><br /><p style="text-align:center" class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>FeedBack <i class="fa fa-chevron-right"></i></span></p>
+</h1>
+
+
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center ">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <span class="subheading">Resturant</span>
+                <h2 class="mb-4">Feedback</h2>
+                @if (Session["Customer"] == null)
+                {<p class="font-weight-bold" style="height:300px">
+                        Please Login...
+                        To Give Feedback
+
+                        <a href="@Url.Action("Login", "Customers")" class=" btn fa fa-user" style="color:blue">  Customer Login</a>
+                    </p>
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-8 ftco-animate">
+
+                <div>
+
+
+
+                    @if (Session["Customer"] != null)
+                    {
+
+                        using (Html.BeginForm("Comment", "Home"))
+                        {
+
+                            <div class="comment-form-wrap pt-5 ">
+                                <h3 class="mb-5 h4 font-weight-bold p-4 bg-light">Leave a comment</h3>
+
+
+                                <form action="#" class="p-4 p-md-5 bg-light">
+                                    <div class="comment-form-wrap pt-5 ">
+                                        <h5>How Was The Experience:</h5>
+                                        <div class="form-group">
+
+                                            <input type="radio" value="Bad" name="REVIEW_TYPE" /> Bad
+                                            <input type="radio" value="Normal" name="REVIEW_TYPE" /> Normal
+
+                                            <input type="radio" value="Good" checked="checked" name="REVIEW_TYPE" /> Good
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email"><b>Email:</b></label>
+                                        <input name="FEEDBACK_EMAIL" required type="email" class="form-control" placeholder="Enter Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="website"><b>Contact:</b></label>
+                                        <input name="FEEDBACK_CONTACT" required type="text"  onkeypress="return /[0-9+]/i.test(event.key);" class="form-control" placeholder="Enter Contact Number">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="message"><b>Message</b></label>
+                                        <textarea name="FEEDBACK_MESSAGE" required cols="30" rows="10" placeholder="Enter Message..." class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                                    </div>
+
+                                </form>
+
+
+                            </div>
+                        }
+                    }
+
+                    <h3 class=" font-weight-bold bg-light">Feedbacks</h3>
+                    <br />
+                    @foreach (var o in db.Feedbacks)
+                    {
+
+                        <ul class="comment-list">
+
+
+                            <li class="comment">
+                                <a class="fa fa-envelope" style="color:red"></a>
+
+                                <div class="comment-body">
+
+                                    <h6 class="mb-2">
+
+                                        Overall Experience: <a class="meta mb-2">  @o.REVIEW_TYPE</a>
+                                    </h6>
+                                    <h3>
+                                        <a class="fa fa-user" style="color:black"></a>
+                                        @o.Customer.CUSTOMER_NAME
+                                    </h3>
+
+                                    <div class="meta mb-2">@DateTime.Parse(o.FEDDBACK_DATE.ToString()).ToLongDateString() @DateTime.Parse(o.FEDDBACK_DATE.ToString()).ToShortTimeString()</div>
+                                    <p>@o.FEEDBACK_MESSAGE</p>
+                                </div>
+                                @if (o.ADMIN_FIDD != null)
+                                {
+                                    <ul class="children">
+
+                                        <li class="comment">
+
+                                            <div class="comment-body">
+                                                <p style="color:gray">reply by</p>
+                                                <h3>Food O'Clock Resturant</h3>
+
+                                                <div class="meta mb-2">@DateTime.Parse(o.REPLY_DATE.ToString()).ToLongDateString()   @DateTime.Parse(o.REPLY_DATE.ToString()).ToShortTimeString()</div>
+                                                <p>@o.RECEIVER_MESSAGE</p>
+
+                                            </div>
+
+
+
+                                        </li>
+                                    </ul>
+                                }
+                            </li>
+
+
+                        </ul>
+                        <!-- END comment-list -->
+                    }
+
+                </div>
+            </div> <!-- .col-md-8 -->
+        </div><!-- END COL -->
+    </div>
+
+</section>
+
+
+<script type="text/javascript">
+    window.onload = function () { window.scrollBy(0, 300); }
+</script>

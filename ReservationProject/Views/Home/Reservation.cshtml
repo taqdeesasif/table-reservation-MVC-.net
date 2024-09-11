@@ -1,0 +1,393 @@
+﻿@using ReservationProject.Models
+
+
+@{
+    int row = 0;
+    int totalQty = 0;
+    decimal totalBill = 0;
+    decimal grdTotal = 0;
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+
+
+@foreach (var tab in (List<TabCategory>)Session["myTable"])
+{
+    <section style="background-image: url(@Url.Content(tab.TABCATEGORY_PICTURE)) ;" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-end justify-content-center">
+                <div class="col-md-9 ftco-animate text-center mb-5">
+                    <h1 class="mb-2 bread" style="color:white"><br /><br /><br />@tab.TABCATEGORY_NAME</h1>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+
+    <p style="color:white; height:2px">1</p>
+
+
+    <section class="ftco-section ftco-wrap-about ftco-no-pb ftco-no-pt">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-sm-12 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
+                    @using (Html.BeginForm("PayNow", "Home"))
+                    {
+                        grdTotal += tab.TABCATEGORY_PRICE;
+
+                    <form class="appointment-form">
+                        <h3 class="mb-3" style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Book your Table</h3>
+
+
+                        <div class="row justify-content-center">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="text" hidden name="TABCATEGORY_FID" class="form-control" placeholder="Table" value="@tab.TABCATEGORY_ID">
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-wrap">
+
+                                        <input name="CHECKIN_DATE" type="text" autocomplete="off" class="form-control book_date " placeholder="Check-In">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-wrap">
+
+                                        <select name="CHECKIN_TIME" class="form-control" placeholder="Time">
+                                            <option value="12:00:00">12:00:00</option>
+                                            
+                                            <option value="13:00:00">13:00:00 </option>
+                                           
+                                            <option value="14:00:00">14:00:00 </option>
+                                           
+                                            <option value="15:00:00">15:00:00</option>
+                                          
+                                            <option value="16:00:00">16:00:00 </option>
+                                           
+                                            <option value="17:00:00">17:00:00</option>
+                                           
+                                            <option value="18:00:00">18:00:00 </option>
+                                           
+                                            <option value="19:00:00">19:00:00 </option>
+                                          
+                                            <option value="20:00:00">20:00:00 </option>
+                                           
+                                            <option value="21:00:00">21:00:00 </option>
+                                           
+                                            <option value="22:00:00">22:00:00 </option>
+                                           
+                                            <option value="23:00:00">23:00:00 </option>
+                                           
+                                           
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input name="ADULTS" type="number"  min="0" max="10" class="form-control" placeholder="Adults">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input name="KIDS" type="number" min="0" max="5" class="form-control" placeholder="Kids">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input name="SPECIAL_REQUEST" type="text" class="form-control" placeholder="Special Request">
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+
+
+
+
+                        <div class="row ">
+                            <table class="table-dark table-hover col-lg-12 ">
+
+
+
+                                <tr style="color:red; " class="border-bottom ">
+                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Picture</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Remove</th>
+
+                                </tr>
+
+
+                                @if (Session["myCart"] != null)
+                                {
+                                    foreach (var menu in (List<Item>)Session["myCart"])
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href="#">
+                                                    <img class="rounded-pill" width="160px" height="130px" src="@Url.Content(menu.ITEM_PICTURE)" />
+                                                </a>
+
+                                            </td>
+                                            <td>
+                                                <a style="color:white" href="#">@menu.ITEM_NAME</a>
+                                                <br />
+                                                <a href="#" style="color:gray; font-size:16px">@menu.ITEM_DESCRIPTION</a>
+                                            </td>
+                                            <td><a style="color:white" href="#">Rs. @menu.ITEM_SALEPRICE </a></td>
+                                            <td>
+                                                <a class="btn btn-sm btn-danger fa fa-minus" href="@Url.Action("MinusFromCart", "Home", new { RowNo = row })"></a>
+                                                <b>@menu.IT_QUANTITY</b>
+                                                <a class="btn btn-sm btn-danger fa fa-plus" href="@Url.Action("PlusToCart", "Home", new { RowNo = row })"></a>
+                                            </td>
+                                            <td><a style="color:white" href="#"> @(decimal.Parse(menu.ITEM_SALEPRICE.ToString()) * int.Parse(menu.IT_QUANTITY.ToString())) </a></td>
+                                            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class=" fa fa-trash-o " href="@Url.Action("RemoveFromCart", "Home", new { RowNo = row })"></a></td>
+                                        </tr>
+                                        row++;
+
+                                        totalQty += menu.IT_QUANTITY;
+
+                                        totalBill += (decimal.Parse(menu.ITEM_SALEPRICE.ToString()) * int.Parse(menu.IT_QUANTITY.ToString()));
+
+                                    }
+                                    grdTotal += totalBill;
+
+
+                                }
+
+                                @if (Session["myCart"] == null && row == 0)
+
+                                {
+
+                                    <tr>
+                                        <td colspan="6" align="center">
+                                            <b><a style="color:blue" href="@Url.Action("AddMenu", "Home")">Click Here</a> To Pre-Order Your Menu</b>
+                                        </td>
+                                    </tr>
+
+
+                                }
+
+                                @if (Session["myCart"] != null && row == 0)
+
+                                {
+                                    Session["myCart"] = null;
+                                    <tr>
+                                        <td colspan="6" align="center">
+                                            <b><a style="color:blue" href="@Url.Action("AddMenu", "Home")">Click Here</a> To Pre-Order Your Menu</b>
+                                        </td>
+                                    </tr>
+
+
+                                }
+
+
+
+                                <tfoot>
+                                    <tr class="border-top">
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td align="center"><b>@totalQty</b></td>
+                                        <td align="center"><b>@totalBill</b></td>
+                                        <td></td>
+
+                                    </tr>
+
+
+                                </tfoot>
+
+
+
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><a class="btn btn-secondary btn-block" href="@Url.Action("AddMenu", "Home")">Add</a></td>
+                                </tr>
+
+
+                            </table>
+
+
+
+                        </div>
+                        <br />
+
+                        <div class="row d-flex align-items-stretch no-gutters">
+                            @if (Session["Customer"] != null)
+                            {
+                                Customer c = (Customer)Session["Customer"];
+
+                                <div class="col-md-6 p-5 order-md-last">
+                                    <h2 class="h4 mb-5 font-weight-bold" style="color:white">Customer Detail</h2>
+
+
+
+                                    <div class="form-group">
+
+                                        <input name="CUSTOMER_NAME" value="@c.CUSTOMER_NAME" type="text" required class="form-control" placeholder="Enter Customer Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="CUSTOMER_ADDRESS" required value="@c.CUSTOMERADDRESS" type="text" class="form-control" placeholder="Enter Customer Address">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="CUSTOMER_CONTACT" required value="@c.CUSTOMERCONTACT" type="text"  class="form-control" placeholder="Enter Customer Contact">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="CUSTOMER_EMAIL" required value="@c.CUSTOMEREMAIL" type="email" class="form-control" placeholder="Enter Customer Email">
+                                    </div>
+
+                                    <div>
+                                        <p style="color:white"> Please Provide Correct Information...</p>
+                                    </div>
+
+
+
+                                </div>
+                            }
+
+                            else
+
+
+                            { <div class="col-md-6 p-5 order-md-last">
+                            
+                                  <h2 class="h4 mb-5 font-weight-bold" style="color:white">
+                                      Contact Detail  &nbsp;
+                                      <a href="@Url.Action("Login","Customers")" class=" btn fa fa-user" style="color:white">  Customer Login</a>
+
+                                  </h2>
+                                    <div class="form-group">
+
+                                        <input name="CUSTOMER_NAME" type="text" required onkeypress="return /[a-z. A-Z]/i.test(event.key);" class="form-control" placeholder="Enter Customer Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="CUSTOMER_ADDRESS" required type="text" class="form-control" placeholder="Enter Customer Address">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="CUSTOMER_CONTACT" required type="text" onkeypress="return /[0-9+]/i.test(event.key);"  class="form-control" placeholder="Enter Contact Number">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="CUSTOMER_EMAIL" required type="email" class="form-control" placeholder="Enter Customer Email">
+                                    </div>
+
+                                    <div>
+                                        <p style="color:white"> Please Provide Correct Information...</p>
+                                    </div>
+
+
+
+                                </div>
+                            }
+
+                           
+
+                        <div class="col-md-6 p-5 order-md-last">
+                            <br /><br /> <br />
+
+                            <hr style="height:1px;border-width:0;color:gray;background-color:#ff8080">
+                            <div>
+                                <p style="color:white">
+                                    Table Charges&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    @tab.TABCATEGORY_PRICE
+                                </p>
+                            </div>
+                            <hr style="height:1px;border-width:0;color:gray;background-color:#ff8080">
+
+                            <div>
+                                <p style="color:white">
+                                    Food Charges:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    @totalBill
+                                </p>
+                            </div>
+                            <hr style="height:1px;border-width:0;color:gray;background-color:#ff8080">
+                            <br />
+
+                            <div>
+                                <p style="color:#990000; ">
+                                    <b>
+                                        Total Bill:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        @grdTotal
+                                    </b>
+                                </p>
+                            </div>
+                            <hr style="height:1px;border-width:0;color:gray;background-color:#ff8080">
+
+
+
+
+                        </div>
+
+
+                        </div>
+                        <div class="col-md-12" style="text-align:right">
+                            <h5 ><b>Payment Mode</b></h5>
+                            <div class="form-group" style="color:white">
+
+                                <input type="radio" value="Cash On Service" checked="checked" name="RESERVATION_STATUS"  /> Cash On Service
+                                <input type="radio" value="Pay With Paypal"  name="RESERVATION_STATUS"  /> Pay With Paypal
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" hidden name="TOTAL_BILL" class="form-control" value="@grdTotal">
+
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="submit" value="Check Out" id="0" class="btn btn-black border-0 rounded py-3 px-4 float-right">
+                            </div>
+                        </div>
+                    </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<script type="text/javascript">
+    window.onload = function () { window.scrollBy(0, 350); }
+</script>
+
+

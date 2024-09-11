@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ReservationProject.Models.Resturant>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","Resturants")" class="btn btn-dangerrr">Create</a>
+</p>
+<table class="table table-condensed table-striped table-responsive table-hover">
+   <thead>
+    <tr>
+        <th>
+            RESTURANT_LOGO
+        </th>
+        <th>
+            RESTURANT NAME
+        </th>
+        <th>
+            EMAIL
+        </th>
+        <th>
+            CONTACT
+        </th>
+        <th>
+            ADDRESS
+        </th>
+
+        <th>
+            IS_VALID
+        </th>
+        <th></th>
+    </tr>
+       </thead>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        <img height="100px" width="100px" src="@Url.Content(item.RESTURANT_LOGO)" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RESTURANT_NAME)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RESTURANT_EMAIL)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RESTURANT_CONTACT)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RESTURANT_ADDRESS)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.IS_VALID)
+    </td>
+    <td>
+        <a class="btn btn-primary fa fa-edit" href="@Url.Action("Edit", "Resturants", new { id = item.RESTURANT_ID })"></a> |
+        <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "Resturants", new { id = item.RESTURANT_ID })"></a> |
+        <a class="btn btn-danger fa fa-trash-o" href="@Url.Action("Delete", "Resturants", new { id = item.RESTURANT_ID })"></a>
+
+
+
+    </td>
+</tr>
+}
+
+</table>

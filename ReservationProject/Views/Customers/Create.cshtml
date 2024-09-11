@@ -1,0 +1,107 @@
+﻿@model ReservationProject.Models.Customer
+
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+   
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+    <h1 style="background-color:black; color:white">
+        <br /><br /><br /><p style="text-align:center" class="breadcrumbs"><span class="mr-2"><a href="index.html">Create <i class="fa fa-chevron-right"></i></a></span> <span>User Account <i class="fa fa-chevron-right"></i></span></p>
+    </h1>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+       
+
+        <div class="form-horizontal bg-primary">
+
+
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <table class=" table-active col-sm-12 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
+                <tr>
+                    <td>
+                    <div class="form-group" style="color:white;width:400px">
+                        NAME
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CUSTOMER_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CUSTOMER_NAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                        </td>
+                </tr>
+                <tr>
+                    <td>
+                    <div class="form-group" style="color:white;width:400px">
+                        EMAIL
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CUSTOMEREMAIL, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CUSTOMEREMAIL, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                        </td>
+                </tr>
+                <tr>
+                    <td>
+                    <div class="form-group" style="color:white;width:400px">
+                        ADDRESS
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CUSTOMERADDRESS, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CUSTOMERADDRESS, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                        </td>
+                </tr>
+                <tr>
+                    <td>
+                    <div class="form-group" style="color:white;width:400px">
+                      CONTACT
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CUSTOMERCONTACT, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CUSTOMERCONTACT, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                        </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    <div class="form-group" style="color:white;width:400px">
+                       PASSWORD
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CUSTOMER_PASSWORD, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CUSTOMER_PASSWORD, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                        </td>
+                </tr>
+                <tr>
+                    <td>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-dark btn-block" />
+                        </div>
+                    </div>
+                        </td>
+                </tr>
+
+            </table>
+        </div>
+    }
+
+    
+</body>
+</html>

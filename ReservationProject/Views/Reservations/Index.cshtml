@@ -1,0 +1,104 @@
+﻿@model IEnumerable<ReservationProject.Models.Reservation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","Reservations")" class="btn btn-dangerrr">Create</a>
+</p>
+<table class="table table-condensed table-striped table-responsive table-hover">
+   <thead>
+    <tr>
+        <th>ID</th>
+       
+        <th>
+           TABLE
+        </th>
+        
+        <th>
+            CHECKIN DATE
+        </th>
+       
+        <th>
+           STATUS
+        </th>
+        <th>
+           ORDER STATUS
+        </th>
+        <th>
+           CHECKIN TIME
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ADULTS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KIDS)
+        </th>
+        <th>
+           REQUEST
+        </th>
+        <th>
+         BILL
+        </th>
+       
+        <th>
+            CUSTOMER NAME
+        </th>
+       
+        <th width="180px"></th>
+    </tr>
+       </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RESERVATION_ID)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.TabCategory.TABCATEGORY_NAME)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.CHECKIN_DATE)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.STATUS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ORDER_STATUS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CHECKIN_TIME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADULTS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KIDS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SPECIAL_REQUEST)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TOTAL_BILL)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.CUSTOMER_NAME)
+        </td>
+       
+        <td>
+            <a class="btn btn-primary fa fa-edit" href="@Url.Action("Edit", "Reservations", new { id = item.RESERVATION_ID })"></a> |
+            <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "Reservations", new { id = item.RESERVATION_ID })"></a> |
+            <a class="btn btn-danger fa fa-trash-o" href="@Url.Action("Delete", "Reservations", new { id = item.RESERVATION_ID })"></a>
+
+        </td>
+    </tr>
+}
+
+</table>

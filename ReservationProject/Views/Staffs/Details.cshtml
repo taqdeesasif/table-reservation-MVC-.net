@@ -1,0 +1,90 @@
+﻿@model ReservationProject.Models.Staff
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Staff</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StaffJob.STAFFJOB_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StaffJob.STAFFJOB_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STAFF_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STAFF_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STAFF_PICTURE)
+        </dt>
+
+        <dd>
+            <img height="100px" width="100px" src="@Url.Content(Model.STAFF_PICTURE)" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SERVICES)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SERVICES)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STAFF_EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STAFF_EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STAFF_ADDRESS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STAFF_ADDRESS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STAFF_CONTACT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STAFF_CONTACT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SALARY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SALARY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IS_WORKING)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IS_WORKING)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.STAFF_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

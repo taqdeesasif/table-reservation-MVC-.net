@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ReservationProject.Models.Availibility>
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+
+<h1 style="background-color:black; color:white">
+    <br /><br /><br /><p style="text-align:center" class="breadcrumbs"><span class="mr-2"><a href="index.html">Reservation <i class="fa fa-chevron-right"></i></a></span> <span>Cancelled <i class="fa fa-chevron-right"></i></span></p>
+</h1>
+
+
+
+
+<br />
+
+
+<p class="btn btn-danger btn-block btn-lg">Error :@TempData["Message"] </p>
+
+<p style="color:black; text-align:center;  font-size:medium">Also please Avoid the following Time Slots...</p>
+<table align="center" class=" table-active col-sm-12 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary ">
+    
+
+
+    <tr style="text-align:center">
+        <th style="color:black" >
+            Unavailable Slots
+            <hr style="height:1px;border-width:0;color:gray;background-color:black">
+        </th>
+
+       
+
+    </tr>
+
+
+    @foreach (var avai in Model)
+    {
+        <tr style="   color:white;     text-align: center">
+            <td> @DateTime.Parse(avai.UNAVAILABLE_DATE.ToString()).ToLongDateString() &nbsp; @avai.UNAVAILABLE_TIME</td>
+
+
+            
+
+
+
+
+
+
+
+        </tr>
+    }
+
+</table>
+
+<a href="@Url.Action("Reservation", "Home")" class="btn btn-dark btn-block btn-lg">Go Back To Reservation Page > > ></a>
+
+<br />

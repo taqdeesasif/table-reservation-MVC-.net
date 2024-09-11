@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ReservationProject.Models.TabCategory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","TabCategories")" class="btn btn-dangerrr">Create</a>
+</p>
+<table class="table table-condensed table-striped table-responsive table-hover">
+  <thead>
+    <tr>
+        <th>
+            PICTURE
+        </th>
+        <th>
+            TABLE NAME
+        </th>
+        <th width="200px">
+            DESCRIPTION
+        </th>
+
+        <th>
+            PRICE
+        </th>
+        <th>
+            VALIDATE
+        </th>
+        <th></th>
+    </tr>
+      </thead>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        <img height="150px" width="150px" src="@Url.Content(item.TABCATEGORY_PICTURE)" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TABCATEGORY_NAME)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TABCATEGORY_DESCRIPTION)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.TABCATEGORY_PRICE)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.VALIDATE)
+    </td>
+    <td>
+
+        <a class="btn btn-primary fa fa-edit" href="@Url.Action("Edit", "TabCategories", new { id = item.TABCATEGORY_ID })"></a> |
+        <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "TabCategories", new { id = item.TABCATEGORY_ID })"></a> |
+        <a class="btn btn-danger fa fa-trash-o" href="@Url.Action("Delete", "TabCategories", new { id = item.TABCATEGORY_ID })"></a>
+
+
+    </td>
+</tr>
+}
+
+</table>

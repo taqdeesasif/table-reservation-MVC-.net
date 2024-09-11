@@ -1,0 +1,90 @@
+﻿@model ReservationProject.Models.Feedback
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Feedback</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin.ADMIN_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin.ADMIN_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.CUSTOMEREMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.CUSTOMEREMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.REVIEW_TYPE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REVIEW_TYPE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEEDBACK_MESSAGE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEEDBACK_MESSAGE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEEDBACK_EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEEDBACK_EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEEDBACK_CONTACT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEEDBACK_CONTACT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEDDBACK_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEDDBACK_DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.REPLY_DATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REPLY_DATE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RECEIVER_MESSAGE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RECEIVER_MESSAGE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FEEDBACK_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

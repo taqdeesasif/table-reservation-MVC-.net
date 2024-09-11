@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ReservationProject.Models.Staff>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","Staffs")" class="btn btn-dangerrr">Create</a>
+</p>
+<table class="table table-condensed table-striped table-responsive table-hover">
+  <thead>
+    <tr>
+        <th>
+            PICTURE
+        </th>
+        <th>
+           JOB
+        </th>
+        <th>
+            NAME
+        </th>
+
+        <th>
+            SERVICES
+        </th>
+        <th>
+            EMAIL
+        </th>
+        <th>
+            ADDRESS
+        </th>
+        <th>
+            CONTACT
+        </th>
+        <th>
+            SALARY
+        </th>
+        <th>
+            IS WORKING
+        </th>
+        <th width="180px"></th>
+    </tr>
+      </thead>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        <img height="150px" width="150px" src="@Url.Content(item.STAFF_PICTURE)" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StaffJob.STAFFJOB_NAME)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.STAFF_NAME)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.SERVICES)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.STAFF_EMAIL)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.STAFF_ADDRESS)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.STAFF_CONTACT)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SALARY)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IS_WORKING)
+    </td>
+    <td>
+        <a class="btn btn-primary fa fa-edit" href="@Url.Action("Edit", "Staffs", new { id = item.STAFF_ID })"></a> |
+        <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "Staffs", new { id = item.STAFF_ID })"></a> |
+        <a class="btn btn-danger fa fa-trash-o" href="@Url.Action("Delete", "Staffs", new { id = item.STAFF_ID })"></a>
+
+
+
+    </td>
+</tr>
+}
+
+</table>

@@ -1,0 +1,278 @@
+﻿
+@using ReservationProject.Models
+
+
+@{
+    Model5 db = new Model5();
+    int row = 0;
+    int totalQty = 0;
+    decimal totalBill = 0;
+
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+<h1 style="background-color:black; color:white">
+    <br /><br /><br /><p style="text-align:center" class="breadcrumbs"><span class="mr-2"><a href="index.html">Reservation <i class="fa fa-chevron-right"></i></a></span> <span>Invoive <i class="fa fa-chevron-right"></i></span></p>
+</h1>
+<h5 style="text-align:center; background-color:black; color:white">Table Reserved....Thanks For Your Trust....</h5>
+<div id="printArea">
+
+    @foreach (var tab in (List<TabCategory>)Session["myTable"])
+    {
+
+
+    <p style="text-align:right;font-size:14px">Date: &nbsp;  @DateTime.Now.ToLongDateString()  &nbsp; @DateTime.Now.ToShortTimeString()</p>
+
+
+
+        <center>
+            <table>
+                <tr style=" font-size:14px">
+                    <td width="33%" rowspan="3"><img src="@Url.Content(db.Resturants.Where(x=>x.IS_VALID == true).Select(x => x.RESTURANT_LOGO).Single())" height="100px" width="200px" /></td>
+                    <td width="33%"></td>
+                    <td width="33%"><b>Email:&nbsp;&nbsp;&nbsp;</b> @db.Resturants.Where(x => x.IS_VALID == true).Select(x => x.RESTURANT_EMAIL).Single()</td>
+                </tr>
+                <tr style=" font-size:14px">
+                    <td></td>
+                    <td><b>Address:&nbsp;&nbsp;&nbsp;</b> @db.Resturants.Where(x => x.IS_VALID == true).Select(x => x.RESTURANT_ADDRESS).Single()</td>
+                </tr>
+                <tr style=" font-size:14px">
+                    <td></td>
+                    <td><b>Contact:&nbsp;&nbsp;&nbsp;</b> @db.Resturants.Where(x => x.IS_VALID == true).Select(x => x.RESTURANT_CONTACT).Single()</td>
+                </tr>
+
+
+            </table>
+
+        </center>
+
+
+
+
+
+
+        if (Session["Reservation"] != null)
+        {
+            Reservation r = (Reservation)Session["Reservation"];
+
+
+
+            <h2 style="text-align:center; background-color: gray; color:black">Invoice</h2>
+
+            <div class="row justify-content-center">
+
+
+
+                <center>
+                    <table class="table table-borderless table-hover">
+
+
+                        <tr style="font-size:14px">
+                            <td style="color:black"><b>  Reservation ID</b></td>
+                            <td>@r.RESERVATION_ID</td>
+                            <td style="color:black"><b>Customer Name</b></td>
+                            <td>@r.CUSTOMER_NAME</td>
+
+                        </tr>
+
+                        <tr style="font-size:14px">
+                            <td style="color:black"><b>  Chech-In</b></td>
+                            <td>@DateTime.Parse(r.CHECKIN_DATE.ToString()).ToLongDateString()  @r.CHECKIN_TIME</td>
+                            <td style="color:black"><b>Contact</b></td>
+                            <td>@r.CUSTOMER_CONTACT</td>
+                        </tr>
+                        <tr style="font-size:14px">
+                            <td style="color:black"><b>Adults</b></td>
+                            <td>@r.ADULTS</td>
+                            <td style="color:black"><b>Email</b></td>
+                            <td>@r.CUSTOMER_EMAIL</td>
+                        </tr>
+                        <tr style="font-size:14px">
+                            <td style="color:black"><b>Kids</b></td>
+                            <td>@r.KIDS</td>
+
+                            <td style="color:black"><b>Address</b></td>
+                            <td>@r.CUSTOMER_ADDRESS</td>
+                        </tr>
+                        <tr style="font-size:14px">
+
+                            <td style="color:black"><b>Status</b></td>
+                            <td>@r.RESERVATION_STATUS</td>
+                            <td style="color:black"><b>Booking Confirmation Date</b></td>
+                            <td>@DateTime.Parse(r.DATE_TIME.ToString()).ToLongDateString()</td>
+                        </tr>
+
+                        <tr style="font-size:14px">
+
+                            <td style="color:black"><b>Special Request</b></td>
+                            <td >@r.SPECIAL_REQUEST</td>
+                            <td style="color:black"><b>Table</b></td>
+                            <td>@tab.TABCATEGORY_NAME</td>
+                        </tr>
+
+
+                    </table>
+                </center>
+
+            </div>
+
+
+
+            <br />
+            if (Session["myCart"] != null)
+            { <div class="row ">
+
+                    <table class="table table-hover table-condensed " style="text-align:center; font-size:14px"  align="center">
+
+                        <tr class="border-bottom " style="background-color:gray">
+
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+
+                        </tr>
+
+
+                        @if (Session["myCart"] != null)
+                        {
+                            foreach (var menu in (List<Item>)Session["myCart"])
+                            {
+                                <tr>
+
+                                    <td>
+                                        <a  style="color:black">@menu.ITEM_NAME</a>
+                                        <br />
+                                        <a  style="color:gray; font-size:14px">@menu.ITEM_DESCRIPTION</a>
+                                    </td>
+                                    <td><a  style="color:black">Rs.<br />  @menu.ITEM_SALEPRICE </a></td>
+                                    <td>
+
+                                        <b>@menu.IT_QUANTITY</b>
+
+                                    </td>
+                                    <td><a style="color:black">
+                                     Rs. <br />   @(decimal.Parse(menu.ITEM_SALEPRICE.ToString()) * int.Parse(menu.IT_QUANTITY.ToString())) </a></td>
+
+                                </tr>
+                                row++;
+
+                                totalQty += menu.IT_QUANTITY;
+
+                                totalBill += (decimal.Parse(menu.ITEM_SALEPRICE.ToString()) * int.Parse(menu.IT_QUANTITY.ToString()));
+
+                            }
+
+
+                        }
+
+
+                        <tfoot>
+                            <tr class="border-top">
+
+                                <td></td>
+                                <td></td>
+                                <td><b>@totalQty</b></td>
+                                <td><b>Rs. @totalBill</b></td>
+
+                            </tr>
+                        </tfoot>
+
+
+
+
+
+
+                    </table>
+
+
+
+                </div>}
+           
+            <center>
+                <div class="row d-flex align-items-stretch no-gutters ">
+
+
+                    &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="col-md-6 p-5 order-md-last">
+
+                        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                        <div>
+                            <p>
+
+
+                                Table Charges: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                @tab.TABCATEGORY_PRICE
+                            </p>
+                        </div>
+
+
+                        <div>
+                            <p>
+                                Food Charges:  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                @totalBill
+                            </p>
+                        </div>
+                        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+
+                        <div>
+                            <p>
+                                <b>
+                                    Total Bill:  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    @r.TOTAL_BILL
+                                </b>
+                            </p>
+                        </div>
+                        <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+
+
+                    </div>
+
+
+                </div>
+
+            </center>
+
+        }
+
+
+
+    }
+</div>
+
+<form>
+    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <div style="text-align:center" >
+        <input type="submit" class="btn btn-danger " value="Print Now" onclick="return PrintFunction();" />
+        <a class="btn btn-danger " href="@Url.Action("CloseOrder","Home")"> Close Order?</a>
+        
+    </div>
+    <br />
+</form>
+
+
+
+
+
+<script type="text/javascript">
+    function PrintFunction() {
+        var print = document.getElementById('printArea');
+
+
+        var printWindow = window.open('', '', 'height=400,width=800');
+        printWindow.document.write('<html><head><title>DIV Contents</title>');
+        printWindow.document.write('</head><body >');
+        printWindow.document.write(print.innerHTML);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        setTimeout(function () {
+            printWindow.print();
+        }, 500);
+
+
+
+        return false;
+    }
+</script>

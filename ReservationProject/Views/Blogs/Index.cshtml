@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ReservationProject.Models.Blog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","Blogs")" class="btn btn-dangerrr">Create</a>
+</p>
+<table class="table table-condensed table-striped table-responsive table-hover">
+    <thead>
+    <tr>
+        <th width="150px">
+            PICTURE
+        </th>
+        <th width="100px">
+            @Html.DisplayNameFor(model => model.Admin.ADMIN_NAME)
+        </th>
+        <th width="100px">
+            TITLE
+        </th>
+
+        <th width="100px">
+            DATE
+        </th>
+        <th width="400px">
+            DESCRIPTION
+        </th>
+        <th></th>
+    </tr>
+        </thead>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        <img height="150px" width="150px" src="@Url.Content(item.BLOG_PICTURE)" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Admin.ADMIN_NAME)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BLOG_TITLE)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.BLOG_DATE)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BLOG_DESCRIPTION)
+    </td>
+    <td>
+        <a class="btn btn-primary fa fa-edit" href="@Url.Action("Edit", "Blogs", new { id = item.BLOG_ID })"></a> |
+        <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "Blogs", new { id = item.BLOG_ID })"></a> |
+        <a class="btn btn-danger fa fa-trash-o" href="@Url.Action("Delete", "Blogs", new { id = item.BLOG_ID })"></a>
+
+
+
+    </td>
+</tr>
+}
+
+</table>

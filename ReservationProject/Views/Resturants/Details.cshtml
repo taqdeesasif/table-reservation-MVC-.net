@@ -1,0 +1,66 @@
+﻿@model ReservationProject.Models.Resturant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Resturant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RESTURANT_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RESTURANT_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RESTURANT_EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RESTURANT_EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RESTURANT_CONTACT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RESTURANT_CONTACT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RESTURANT_ADDRESS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RESTURANT_ADDRESS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RESTURANT_LOGO)
+        </dt>
+
+        <dd>
+            <img height="100px" width="100px" src="@Url.Content(Model.RESTURANT_LOGO)" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IS_VALID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IS_VALID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RESTURANT_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

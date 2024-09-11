@@ -1,0 +1,64 @@
+﻿@model ReservationProject.Models.TabCategory
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TabCategory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TABCATEGORY_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TABCATEGORY_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TABCATEGORY_DESCRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TABCATEGORY_DESCRIPTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TABCATEGORY_PICTURE)
+        </dt>
+
+        <dd>
+            <img height="100px" width="100px" src="@Url.Content(Model.TABCATEGORY_PICTURE)" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TABCATEGORY_PRICE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TABCATEGORY_PRICE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VALIDATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VALIDATE)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

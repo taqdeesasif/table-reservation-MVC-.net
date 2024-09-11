@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ReservationProject.Models.Item>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","Items")" class="btn btn-dangerrr">Create</a>
+</p>
+<table class="table table-condensed table-striped table-responsive table-hover">
+  <thead>
+    <tr>
+        <th>
+            PICTURE
+        </th>
+        <th>
+            CATEGORY NAME
+        </th>
+        <th>
+          ITEM NAME
+        </th>
+        <th width="200px">
+           DESCRIPTION
+        </th>
+        <th>
+            SALEPRICE
+        </th>
+
+        <th></th>
+    </tr>
+      </thead>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        <img style="border-radius:45%" height="80px" width="80px" src="@Url.Content(item.ITEM_PICTURE)" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ItemCategory.ITEMCATEGORY_NAME)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ITEM_NAME)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ITEM_DESCRIPTION)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ITEM_SALEPRICE)
+    </td>
+
+    <td>
+        <a class="btn btn-primary fa fa-edit" href="@Url.Action("Edit", "Items", new { id = item.ITEM_ID })"></a> |
+        <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "Items", new { id = item.ITEM_ID })"></a> |
+        <a class="btn btn-danger fa fa-trash-o" href="@Url.Action("Delete", "Items", new { id = item.ITEM_ID })"></a>
+
+
+
+    </td>
+</tr>
+}
+
+</table>

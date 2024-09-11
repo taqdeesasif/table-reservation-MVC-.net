@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ReservationProject.Models.ContactU>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create","ContactUs")" class="btn btn-dangerrr">Create</a>
+</p>
+<table class="table  table-condensed table-striped table-responsive table-hover">
+  <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.CUSTOMER_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONTACTUS_EMAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONTACTUS_MESSAGE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONTACTUS_DATE)
+        </th>
+        <th></th>
+    </tr>
+      </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.CUSTOMER_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONTACTUS_EMAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONTACTUS_MESSAGE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONTACTUS_DATE)
+        </td>
+        <td>
+            <a class="btn btn-primary fa fa-edit" href="@Url.Action("Edit", "ContactUs", new { id = item.CONTACTUS_ID })"></a> |
+            <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "ContactUs", new { id = item.CONTACTUS_ID })"></a> |
+            <a class="btn btn-danger fa fa-trash-o" href="@Url.Action("Delete", "ContactUs", new { id = item.CONTACTUS_ID })"></a>
+
+
+
+
+          
+        </td>
+    </tr>
+}
+
+</table>

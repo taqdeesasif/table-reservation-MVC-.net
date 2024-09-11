@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ReservationProject.Models.Admin>
+@using ReservationProject.Models;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+   <a href="@Url.Action("Create","Admins")" class="btn btn-dangerrr">Create</a>
+</p>
+<table class="table table-condensed table-responsive table-hover ">
+    <tr>
+        <th>
+           NAME
+        </th>
+        <th>
+           EMAIL
+        </th>
+        <th>
+         PASSWORD
+        </th>
+        <th>
+           CONTACT
+        </th>
+        <th>
+           ADDRESS
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    Admin a = (Admin)Session["Admin"];
+    if (a.ADMIN_ID == item.ADMIN_ID)
+    {  <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADMIN_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADMIN_EMAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADMIN_PASSWORD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADMIN_CONTACT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADMIN_ADDRESS)
+        </td>
+        <td>
+
+            <a class="btn btn-primary fa fa-edit" href="@Url.Action("Edit", "Admins" , new { id= item.ADMIN_ID})"></a> |
+            <a class="btn btn-success fa fa-book" href="@Url.Action("Details", "Admins" , new { id= item.ADMIN_ID})"></a> |
+            <a class="btn btn-danger fa fa-trash-o" href="@Url.Action( "Delete","Admins" , new { id=item.ADMIN_ID})"></a>
+
+
+
+        </td>
+    </tr>
+    }
+}
+
+</table>
